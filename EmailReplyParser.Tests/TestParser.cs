@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using System.Reflection;
-using NUnit.Framework;
+
+using Xunit;
 
 namespace EmailReplyParser.Tests
 {
-    [TestFixture]
     public class TestParser
     {
         private string LoadFile(string resourceName)
@@ -18,26 +18,27 @@ namespace EmailReplyParser.Tests
             }
         }
 
-        [Test][TestCase("correct_sig.txt")]
-        [TestCase("email_1_1.txt")]
-        [TestCase("email_1_2.txt")]
-        [TestCase("email_1_3.txt")]
-        [TestCase("email_1_4.txt")]
-        [TestCase("email_1_5.txt")]
-        [TestCase("email_1_6.txt")]
-        [TestCase("email_1_7.txt")]
-        [TestCase("email_1_8.txt")]
-        [TestCase("email_2_1.txt")]
-        [TestCase("email_2_2.txt")]
-        [TestCase("email_BlackBerry.txt")]
-        [TestCase("email_bullets.txt")]
-        [TestCase("email_iPhone.txt")]
-        [TestCase("email_multi_word_sent_from_my_mobile_device.txt")]
-        [TestCase("email_one_is_not_on.txt")]
-        [TestCase("email_sent_from_my_not_signature.txt")]
-        [TestCase("email_sig_delimiter_in_middle_of_line.txt")]
-        [TestCase("greedy_on.txt")]
-        [TestCase("pathological.txt")]
+        [Theory]
+        [InlineData("correct_sig.txt")]
+        [InlineData("email_1_1.txt")]
+        [InlineData("email_1_2.txt")]
+        [InlineData("email_1_3.txt")]
+        [InlineData("email_1_4.txt")]
+        [InlineData("email_1_5.txt")]
+        [InlineData("email_1_6.txt")]
+        [InlineData("email_1_7.txt")]
+        [InlineData("email_1_8.txt")]
+        [InlineData("email_2_1.txt")]
+        [InlineData("email_2_2.txt")]
+        [InlineData("email_BlackBerry.txt")]
+        [InlineData("email_bullets.txt")]
+        [InlineData("email_iPhone.txt")]
+        [InlineData("email_multi_word_sent_from_my_mobile_device.txt")]
+        [InlineData("email_one_is_not_on.txt")]
+        [InlineData("email_sent_from_my_not_signature.txt")]
+        [InlineData("email_sig_delimiter_in_middle_of_line.txt")]
+        [InlineData("greedy_on.txt")]
+        [InlineData("pathological.txt")]
         public void VerifyParsedReply(string fileName)
         {
             var email = LoadFile(string.Format("EmailReplyParser.Tests.TestEmails.{0}", fileName));
@@ -46,7 +47,7 @@ namespace EmailReplyParser.Tests
             var parser = new Lib.Parser();
             var reply = parser.ParseReply(email);
 
-            Assert.AreEqual(expectedReply, reply);
+            Assert.Equal(expectedReply, reply);
         }
     }
 }
