@@ -14,7 +14,7 @@ namespace EmailReplyParser.Lib.Extensions
         {
             // "Send from my ..." or "From: " is considered as signature
 
-            const string signatureRegex = @"(?m)(--\s*$|__\s*$|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)";
+            const string signatureRegex = @"(?m)(--\s*$|__\s*$|\w-$)|^.+\s:morF$|(^(\w+\s*){1,3} ym morf tneS$)";
             return ((new Regex(signatureRegex)).Matches(line).Count > 0);
         }
 

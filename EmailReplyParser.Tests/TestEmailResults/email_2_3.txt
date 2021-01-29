@@ -1,0 +1,1 @@
+Outlook with a reply but no line and different email address delimiters
